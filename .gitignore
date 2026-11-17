@@ -43,3 +43,6 @@ next-env.d.ts
 # capturas e verificações locais
 .taste-skill/
 shots/
+
+.vercel
+.env*
