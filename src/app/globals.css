@@ -1,26 +1,267 @@
 @import "tailwindcss";
 
+/* ============ Identidade Ser Você ============ */
+@theme {
+  --color-marca: #2eaaf5; /* azul da logo: ilustrações, traços, destaques grandes */
+  --color-marca-forte: #0b6fae; /* botões e links (contraste AA com branco) */
+  --color-marca-escura: #0a5a8f;
+  --color-tinta: #17324a; /* texto principal */
+  --color-suave: #4a6275; /* texto secundário */
+  --color-creme: #fbfaf6;
+  --color-nevoa: #eef7fe; /* azul claríssimo */
+  --color-ceu: #d9eefc;
+  --color-sol: #f5c542; /* amarelo do miolo das flores — com moderação */
+  --color-sol-claro: #fdf3d3;
+
+  --font-sans: var(--font-nunito), ui-rounded, system-ui, sans-serif;
+  --font-manuscrita: var(--font-parisienne), cursive;
+
+  --radius-card: 1.75rem;
+  --ease-suave: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-pagina: #ffffff;
+  --header-h: 76px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-padding-top: calc(var(--header-h) + 16px);
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-pagina);
+  color: var(--color-tinta);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  transition: background-color 0.9s var(--ease-suave);
+  overflow-x: clip;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Foco visível em tudo */
+:where(a, button, [role="tab"], summary, input, select, textarea):focus-visible {
+  outline: 3px solid var(--color-marca-forte);
+  outline-offset: 3px;
+  border-radius: 0.75rem;
+}
+
+::selection {
+  background: var(--color-ceu);
+  color: var(--color-tinta);
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+  letter-spacing: -0.015em;
+}
+p {
+  text-wrap: pretty;
+}
+
+/* Placeholders (dados ainda não fornecidos) */
+.ph {
+  background: var(--color-sol-claro);
+  color: #6b5100;
+  border-radius: 0.35rem;
+  padding: 0 0.3em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  outline: 1px dashed #e0b52f;
+  outline-offset: -1px;
+  font-style: normal;
+}
+
+/* Botões */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 52px;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 1rem;
+  line-height: 1.2;
+  transition:
+    transform 0.35s var(--ease-suave),
+    background-color 0.3s,
+    box-shadow 0.35s var(--ease-suave),
+    color 0.3s;
+  will-change: transform;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn-primario {
+  background: var(--color-marca-forte);
+  color: #fff;
+  box-shadow: 0 10px 24px -10px rgb(11 111 174 / 0.65);
+}
+.btn-primario:hover {
+  background: var(--color-marca-escura);
+  box-shadow: 0 16px 32px -12px rgb(11 111 174 / 0.7);
+}
+.btn-secundario {
+  background: #fff;
+  color: var(--color-marca-forte);
+  box-shadow: inset 0 0 0 2px var(--color-ceu);
+}
+.btn-secundario:hover {
+  box-shadow: inset 0 0 0 2px var(--color-marca);
+  background: var(--color-nevoa);
+}
+.btn-claro {
+  background: #fff;
+  color: var(--color-marca-escura);
+}
+.btn-claro:hover {
+  background: var(--color-sol-claro);
+}
+
+/* Link com sublinhado que se desenha */
+.link-linha {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.4s var(--ease-suave);
+}
+.link-linha:hover,
+.link-linha:focus-visible {
+  background-size: 100% 2px;
+}
+
+/* Título com o marcador manuscrito */
+.sobretitulo {
+  font-family: var(--font-manuscrita);
+  color: var(--color-marca-forte);
+  font-size: 1.75rem;
+  line-height: 1.1;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+@media (min-width: 768px) {
+  .wrap {
+    padding-inline: 2rem;
+  }
+}
+
+.secao {
+  position: relative;
+  padding-block: clamp(5rem, 11vw, 8.5rem);
+}
+
+/* Revelação de palavras do hero */
+.palavra {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.palavra > span {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* Pulso do WhatsApp */
+@keyframes pulso {
+  0%,
+  70%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(37 211 102 / 0.55);
+  }
+  85% {
+    box-shadow: 0 0 0 16px rgb(37 211 102 / 0);
+  }
+}
+.pulso {
+  animation: pulso 4.5s ease-out infinite;
+}
+
+/* Asas da borboleta */
+@keyframes bater-asa {
+  0%,
+  100% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(0.28);
+  }
+}
+.asa {
+  transform-box: fill-box;
+  animation: bater-asa var(--asa-vel, 0.9s) ease-in-out infinite;
+}
+.asa-esq {
+  transform-origin: 100% 60%;
+}
+.asa-dir {
+  transform-origin: 0% 60%;
+}
+
+/* Balançar suave das flores decorativas */
+@keyframes balanco {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+.balanco {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: balanco 6s ease-in-out infinite;
+}
+
+/* Ilustrações das especialidades: em toque, a flor já aparece aberta */
+.estado-botao {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Acordeão */
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  body {
+    transition: none;
+  }
 }

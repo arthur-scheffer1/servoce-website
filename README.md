@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ser Você – Clínica de Psicologia Integrada
 
-## Getting Started
+Protótipo do site institucional da **Ser Você** — _"Um espaço para ouvir, acolher e florescer."_
 
-First, run the development server:
+One-page em Next.js (App Router) + Tailwind CSS + TypeScript, com animações em GSAP/ScrollTrigger e rolagem suave com Lenis. Sem backend: a ação principal é agendar pelo WhatsApp.
+
+## Rodar localmente
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Onde trocar os textos e dados
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Tudo fica em **`src/content/clinica.ts`**: nome, WhatsApp, Instagram, endereço, horários, equipe, especialidades, perguntas frequentes etc.
 
-## Learn More
+- Textos entre `[colchetes]` são **placeholders** e aparecem destacados em amarelo no site até serem trocados.
+- **WhatsApp:** troque `whatsapp: "55XXXXXXXXXXX"` pelo número real (55 + DDD + número, só dígitos).
+- **Headline do hero:** `hero.headlineAtiva` aceita `"a"` ou `"b"`.
+- **Fotos:** os blocos "Foto: …" são o componente `FotoPlaceholder`. Coloque as imagens em `public/fotos/` e troque pelo `<img>` correspondente.
+- **Mapa:** preencha `mapaUrl` com o link do Google Maps para exibir o botão "Como chegar".
 
-To learn more about Next.js, take a look at the following resources:
+## Estrutura
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+  app/            layout (SEO, fontes) e página
+  content/        clinica.ts — todos os textos e dados
+  components/
+    secoes/       Hero, Reconhece, Sobre, Especialidades, ParaQuem, Equipe,
+                  ComoFunciona, Instagram, Duvidas, Contato (+ Rodapé)
+    movimento/    Lenis, barra de progresso, borboleta-guia, flores que desabrocham, botão magnético
+    ilustracoes.tsx  flores, ramos, borboleta e ícones em SVG
+public/brand/     versões da logo (azul, branca, símbolo), og.jpg
+scripts/          process-logo.py — gera as versões da logo a partir do JPG original
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Ética (CFP)
 
-## Deploy on Vercel
+Sem depoimentos, sem promessas de resultado, sem preço como propaganda, sem urgência ou escassez. CRP de cada profissional em destaque e aviso de emergência (CVV 188 / SAMU 192).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Publicar na Vercel
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Acesse https://vercel.com/new e importe este repositório do GitHub.
+2. A Vercel detecta Next.js sozinha; clique em **Deploy**.
+3. Quando tiver domínio próprio, adicione em _Settings → Domains_ e atualize `siteUrl` em `src/content/clinica.ts`.
