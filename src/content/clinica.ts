@@ -44,7 +44,7 @@ export const clinica = {
   },
 
   /** Endereço do site publicado (para SEO). Trocar quando tiver domínio. */
-  siteUrl: "https://servoce.vercel.app",
+  siteUrl: "https://servoce-website.vercel.app",
 };
 
 /* ---------------- HERO ---------------- */
